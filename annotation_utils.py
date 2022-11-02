@@ -92,7 +92,7 @@ def get_points_from_CAD():
     anchors[6] = anchors[5].copy()
     anchors[6][0] *= -1
     
-    return keypoints, anchors[:,:2]
+    return keypoints, anchors
 
 def rot_mtx(theta):
     """
