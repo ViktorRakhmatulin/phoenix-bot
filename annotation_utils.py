@@ -26,7 +26,9 @@ def detect_apriltag(img,camera_params):
     results = detector.detect(gray,
                               estimate_tag_pose=True,
                               camera_params=camera_params, 
-                              tag_size=0.048)
+                              tag_size=48.0)
+    # print(results)
+
     if not results:
         print('apriltag not found')
         return
