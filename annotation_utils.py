@@ -6,14 +6,14 @@ from skimage import transform
 from scipy.spatial.transform import Rotation as R
 
 detector = apriltag.Detector(families="tagStandard52h13")
-
+# detector = apriltag.Detector(families="tagStandard41h12")
 
 def detect_apriltag(img,camera_params):
     """
     returns detection object, containing marker center and corners coordinates 
     """
     if isinstance(img, str):
-        print('reading img from file system')
+        # print('reading img from file system')
         img = cv2.imread(img)
     if not type(img[0][0][0]) == np.uint8:
         img = img/img.max()
