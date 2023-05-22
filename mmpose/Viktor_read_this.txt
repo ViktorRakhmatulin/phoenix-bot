@@ -1,0 +1,50 @@
+Here we have:
+- configs folder
+- work_dir* folders
+- vis-result* folders
+- count_mse.ipynb
+- data folder
+
+in data there is socket folder, where it should be pretty obvious - annotation files, bbox files, images in corresponfing folders
+
+count_mse is a script to get statistics for output of NNs, instruction is inside
+
+vis-result folders are used to get visualisations of predictions
+
+work_dirs contain checkpoints for NNs, in corresponding folders for each backbone
+
+configs/body/2d....img/ folder contains configs for running train and test
+
+
+
+
+how to run
+
+training:
+args: config file
+python tools/train.py configs/body/2d_kpt_sview_rgb_img/cid/socket/hrnet_w48_socket_512x512.py
+
+tests:
+args: config file, checkpoint, out file for keypoints
+python tools/test.py configs/body/2d_kpt_sview_rgb_img/topdown_heatmap/socket/swin_b_p4_w7_fpn_socket_640x360.py work_dirs/swin_b_p4_w7_fpn_socket_640x360/best_AP_epoch_60.pth --out work_dir_topdown/swin_640x360_results.json
+
+visualisation:
+for topdown: (if it doesn't work - check another :) )
+python demo/top_down_img_demo.py
+
+for bottomup:
+python demo/bottom_up_img_demo.py
+https://github.com/open-mmlab/mmpose/blob/master/demo/docs/2d_wholebody_pose_demo.md
+
+
+advice to use checkpoint with best_AP, as AP is related to mse
+
+to prepare the config from scratch, you need to change:
+
+line 2: coco.py to socket.py - that's some base config for dataset
+in channel_cfg all 17-s to 14-s (or number of keypoints you need) + range(17) to range(14), sometimes it's an array 0 to 16, then change it to 0-13
+in data_cfg you can play with image size and heatmap size. In some NNs it's a single number, then image is square, in others it's 2 numbers, [height, width], NOT OTHERWISE
+data_root is 'data/socket'
+then you change all paths, better co copy from some other socket config
+batch sizes - heuristic is to divide base by 4, and samples_per_gpu is 1 or 2
+

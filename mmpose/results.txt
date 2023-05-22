@@ -1,0 +1,14 @@
+res152_socket_640x640,			associative embedding,	mse: 3.27,	inf time 2.2/sec
+higherhrnet_w32_socket_640x640,	associative embedding,	mse: 1.22,	inf time 2.5/sec
+res50_socket_640x640,			associative embedding,	mse: 3.6,	inf time 2.8/sec, epoch 40
+mobilenetv2_512x512,			associative embedding,	mse: 5.0,	inf time 5/sec
+
+3xrsn50_socket_256x192,		topdown heatmap,	mse: 106k,	inf time 38/sec
+res50_socket_256x192,			deeppose,		mse:, 102k,	inf time 175/sec
+litehrnet_30_socket_384x288,		topdown heatmap,	mse: 107k,	inf time 44/sec
+
+//3xrsn_socket_1280x720 - topdown heatmap, resolution:, mse: - no success
+//swin_l_p4_w7_socket_384x288 - topdown heatmap, mse: - no success
+
+hrnet_w48_socket_640x640 - associative - ckpt lost :(
+hrnet_w48_socket_512x512 - cid - no success
